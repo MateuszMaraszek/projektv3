@@ -16,13 +16,13 @@ pipeline {
         stage('Static Check') {
             steps {
                 echo 'Sprawdzanie plików HTML/CSS/JS...'
-                sh 'ls index.html style.css script.js'
+                bat 'ls index.html style.css script.js'
             }
         }
 
         stage('Docker Build') {
             steps {
-                sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+                bat "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
             }
         }
 
