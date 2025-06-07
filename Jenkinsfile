@@ -38,7 +38,7 @@ pipeline {
             emailext(
                 subject: "✅ Build Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: "Build zakończony sukcesem.\n${env.BUILD_URL}",
-                to: "twoj_email@outlook.com"
+                to: "mateuszmaraszek77@gmail.com"
             )
         }
 
@@ -46,7 +46,7 @@ pipeline {
             emailext(
                 subject: "❌ Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: "Build zakończony błędem.\n${env.BUILD_URL}",
-                to: "twoj_email@outlook.com"
+                to: "mateuszmaraszek77@gmail.com"
             )
         }
     }
