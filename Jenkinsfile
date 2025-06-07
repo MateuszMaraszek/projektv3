@@ -4,6 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'guess-my-number'
         DOCKER_TAG = 'latest'
+        REGISTRY = 'docker.io/mateuszmaraszek77'
     }
 
     stages {
@@ -20,15 +21,36 @@ pipeline {
             }
         }
 
-        stage('Docker Build') {
+        stage('Unit Tests') {
+            steps {
+                echo 'Uruchamianie testów jednostkowych...'
+                bat 'npm test'
+            }
+        }
+
+        stage('Build Docker Image') {
             steps {
                 bat "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
             }
         }
 
-        stage('Done') {
+        stage('Push to Registry') {
             steps {
-                echo 'Build zakończony.'
+                echo 'Wysyłanie obrazu do rejestru...'
+                bat "docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${REGISTRY}/${DOCKER_IMAGE}:${DOCKER_TAG}"
+                bat "docker push ${REGISTRY}/${DOCKER_IMAGE}:${DOCKER_TAG}"
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploy aplikacji...'
+            }
+        }
+
+        stage('Integration Tests') {
+            steps {
+                echo 'Testy integracyjne...'
             }
         }
     }
@@ -37,7 +59,7 @@ pipeline {
         success {
             emailext(
                 subject: "✅ Build Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: "Build zakończony sukcesem. :) \n${env.BUILD_URL}",
+                body: "Build i deploy zakończone sukcesem. :) \n${env.BUILD_URL}",
                 to: "mateuszmaraszek77@gmail.com"
             )
         }
@@ -45,7 +67,7 @@ pipeline {
         failure {
             emailext(
                 subject: "❌ Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: "Build zakończony błędem.\n${env.BUILD_URL}",
+                body: "Build/deploy zakończony błędem.\n${env.BUILD_URL}",
                 to: "mateuszmaraszek77@gmail.com"
             )
         }
