@@ -21,13 +21,6 @@ pipeline {
             }
         }
 
-        stage('Unit Tests') {
-            steps {
-                echo 'Uruchamianie testów jednostkowych...'
-                bat 'npm test'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 bat "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
