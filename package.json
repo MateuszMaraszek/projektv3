@@ -1,0 +1,15 @@
+{
+  "name": "Projekt Zaliczeniowy DevOps",
+  "version": "1.0.0",
+  "description": "System losuje randomowy numer a użytkownik musi go zgadnąć. Gdy użytkownik nie zgadnie numeru to wyświetla się komunikat „too low”, a gdy zgadnie (correct number)",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "author": "Mateusz Maraszek, Maryana Sinkevich, Mikołaj Orzoł, Patryk Sokołowski",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
