@@ -3,7 +3,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'guess-my-number'
         DOCKER_TAG = 'latest'
-        REGISTRY = 'docker.io/mateuszmaraszek77'
+        REGISTRY = 'docker.io/mateuszmaraszek'
     }
     stages {
         stage('Checkout') {
