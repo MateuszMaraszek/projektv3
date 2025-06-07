@@ -16,7 +16,7 @@ pipeline {
         stage('Static Check') {
             steps {
                 echo 'Sprawdzanie plików HTML/CSS/JS...'
-                bat 'ls index.html style.css script.js'
+                bat 'dir index.html style.css script.js'
             }
         }
 
