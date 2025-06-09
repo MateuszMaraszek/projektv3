@@ -51,7 +51,7 @@ pipeline {
                         docker rm guess-my-number-app || echo "Kontener nie istnieje"
                         
                         echo "Uruchamianie poprzedniej wersji z backup..."
-                        docker run -d --name guess-my-number-app -p 8080:80 ${REGISTRY}/${DOCKER_IMAGE}:backup || docker run -d --name guess-my-number-app -p 8080:80 nginx:alpine
+                        docker run -d --name guess-my-number-app -p 8090:80 ${REGISTRY}/${DOCKER_IMAGE}:backup || docker run -d --name guess-my-number-app -p 8090:80 nginx:alpine
                     """
                     echo '✅ Rollback zakończony pomyślnie'
                 } catch (Exception e) {
